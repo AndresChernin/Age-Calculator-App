@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator App</title>
+    <link rel="stylesheet" href="styles-for-mainpart2.css">
+    <link rel="stylesheet" href="styles-for-inputpart.css">
+    <link rel="stylesheet" href="styles-for-outputpart.css">
+    <link rel="stylesheet" href="styles-for-buttonpart.css">
+  </head>
+  <body>
+    
+    <div class="view-container"></div>
+    
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script src="InputComponent.jsx" type="text/babel"></script>
+    <script src="InputSection.jsx" type="text/babel"></script>
+    <script src="ButtonSection.jsx" type="text/babel"></script>
+    <script src="OutputComponent.jsx" type="text/babel"></script>
+    <script src="OutputSection.jsx" type="text/babel"></script>
+    <script src="Model2.js"></script>
+    <script src="Controller.js"></script>
+    <script src="InputValidator.js"></script>
+    <script type="text/babel">
+      
+
+
+       function App(){
+         const [values,setValues]=React.useState({
+         day:"",
+         month:"",
+         year:""
+       });
+        const [errors,setErrors]=React.useState({
+           day:"",
+           month:"",
+           year:""
+        });
+        const [results,setResults]=React.useState({
+           days:"--",
+           months:"--",
+           years:"--"
+        });
+        const emptyErrors={day:"",month:"",year:""};
+        const emptyResults={days:"--",months:"--", years:"--"};
+        const controller=React.useRef(
+          new Controller(new DateCalculator2())
+        ).current;
+
+    
+     
+     function noErrors(errors){
+            return Object.values(errors).every(e => e === "");
+     }
+     
+     function handleChangeOfInput(field) {
+       return (event) => {
+          const newValue = event.target.value;
+          const newValues = { ...values, [field]: newValue };
+          setValues(newValues);
+
+          // 🟢 New validation
+          const newErrors = InputValidator.validateAllLive(newValues);
+
+          setErrors(newErrors);
+       };
+     }
+     function handleButtonClick(){
+        var newErrors = InputValidator.validateEmptyValues(values,errors);
+        var newErrors2=InputValidator.veryLastValidation(values,newErrors);
+        
+        setErrors(newErrors2);
+        if(!noErrors(errors)){
+          
+          return;
+       }
+        //console.log("Wir rufen den Controller auf!");
+        const response=controller.process(values);
+        //console.log(`This is resultsModel: ${response.result}`);
+        setResults(response.result);
+     }
+
+        
+     function enterClick(event){
+      if(event.key==='Enter'){
+        handleButtonClick();
+      }
+     }
+         return(
+          <div className="mainPart">
+              <InputSection values={values} errors={errors} 
+              inputFunction={handleChangeOfInput} enterClick={enterClick}  
+              />  
+              <ButtonSection convertData={handleButtonClick} />
+              <OutputSection results={results} />
+          </div>
+
+        )
+       }
+      const container = document.querySelector('.view-container');
+      ReactDOM.createRoot(container).render(<App />);
+    </script>
+  </body>
+</html>

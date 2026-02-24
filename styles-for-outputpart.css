@@ -1,0 +1,26 @@
+.class-for-output{
+    width:100%;
+    height:80px;
+    border:1px solid white;
+    
+    display:flex;
+    
+    gap:4px;
+    align-items: center;
+}
+.class-for-result{
+  color:hsl(259, 100%, 65%);
+}
+.class-for-result,.class-for-explanation{
+    font-size: 75px;
+    font-weight: 800;
+    font-style: italic;
+}
+
+@media (max-width:500px){
+ .class-for-result,.class-for-explanation{
+    font-size: clamp(20px, 10vw, 75px);
+    font-weight: 700;
+    font-style: italic;
+}
+}
