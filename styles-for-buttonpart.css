@@ -1,0 +1,32 @@
+.class-line{
+    border:1px solid hsl(0, 0%, 86%);
+    width:80%;
+    height:1px;
+    background-color:hsl(0, 0%, 86%) ;
+}
+.arrow-button{
+    background-color: hsl(259, 100%, 65%);
+    border-radius: 50%;
+    border:none;
+    padding:14px;
+    /*padding-left:12.5px;
+    padding-right:12.5px;*/
+}
+.arrow-icon{
+    width: 32px;
+    height:32px;
+    display:block;
+}
+
+@media (max-width:500px){
+ .arrow-button{
+  
+  position:absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index:1; 
+ }
+ .class-line{
+    width:100%;
+ }
+}

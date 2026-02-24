@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>DateCalculator Tests</title>
+</head>
+<body>
+  <h1>DateCalculator – Unit Tests</h1>
+  <script src="../Model.js"></script>
+
+  <script>
+    // ===== Mini Test Framework =====
+    function assertEquals(actual, expected, message) {
+      if (actual !== expected) {
+        console.error(`❌ FAIL: ${message}`, { actual, expected });
+      } else {
+        console.log(`✅ PASS: ${message}`);
+      }
+    } 
+
+    function assertTrue(condition, message) {
+      if (!condition) {
+        console.error(`❌ FAIL: ${message}`);
+      } else {
+        console.log(`✅ PASS: ${message}`);
+      }
+    }
+     function formatDate(d) {
+      const y = d.getFullYear();
+      const m = String(d.getMonth() + 1).padStart(2, "0");
+      const day = String(d.getDate()).padStart(2, "0");
+      return `${day}.${m}.${y}`;
+    }
+
+    function assertResults(start,end,expectedResult,realResult){
+      const formattedStart=formatDate(start);
+      const formattedEnd=formatDate(end);
+      if(expectedResult===realResult){
+        console.log(`✅ PASS:For Period[${formattedStart},${formattedEnd}]  ${expectedResult} === ${realResult}` );
+      }
+      else{
+        console.log(`❌ FAIL: For Period[${formattedStart},${formattedEnd}]  ${expectedResult} != ${realResult}` );
+      }
+    }
+    // ===== Helper =====
+    function createCalculator(day, month, year) {
+      const calc = new DateCalculator();
+      calc.setData(day, month, year);
+      return calc;
+    }
+    
+
+    // ===== Tests =====
+    (function testValidDate() {
+      const calc = createCalculator(1, 1, 2000);
+      assertTrue(calc.isValidDate(), "01.01.2000 is valid");
+      calc.setData(6,2,2026);
+      assertTrue(calc.isValidDate(), "06.02.2026 is valid");
+      calc.setData(13,12,1945);
+      assertTrue(calc.isValidDate(), "13.12.1945 is valid");
+    })();
+
+    (function testInvalidDate() {
+      const calc = createCalculator();
+      const invalidData=[
+        [31, 2, 2020],
+        [11, 5, 2030],
+        [11, 15, 2020],
+        [45, 9, 2000],
+        [29, 2, 2025],
+
+      ];
+      for (const [d, m, y] of invalidData){
+        calc.setData(d, m, y);
+        assertTrue(!calc.isValidDate(), `${d}.${m}.${y} should be invalid`);
+      }
+      
+      
+    })();
+
+    (function testLeapYear() {
+      const calc = createCalculator();
+      const invalidData=[
+        [29, 2, 2004],
+        [29, 2, 1928],
+        [29, 2, 1948],
+        [29, 2, 1956],
+        [29, 2, 2016],
+
+      ];
+      for (const [d, m, y] of invalidData){
+        calc.setData(d, m, y);
+        assertTrue(calc.isValidDate(), `${d}.${m}.${y} is leap year`);
+      }
+      
+    })();
+    (function testValidResults(){
+      const calc=createCalculator();
+      const testingData=[
+        [new Date(2026,1,7),new Date(2026,1,7),"(0 years, 0 months, 0 days)"],
+        [new Date(2025,1,7),new Date(2026,1,7),"(1 years, 0 months, 0 days)"],
+        [new Date(1999,6,11),new Date(2000,0,1),"(0 years, 5 months, 21 days)"],
+        [new Date(2026,0,30),new Date(2026,1,3),"(0 years, 0 months, 4 days)"],
+        [new Date(2024,11,30),new Date(2025,2,1),"(0 years, 1 months, 30 days)"],
+      ];
+      for(const[start,end,expectedResult]of testingData){
+        const results=calc.countYearsMonthsDays3(start,end);
+        const resultYears=results.years;
+        const resultMonths=results.months;
+        const resultDays=results.days;
+        assertResults
+      (start,end,expectedResult,`(${resultYears} years, ${resultMonths} months, ${resultDays} days)`);
+      }
+      })();
+  </script>
+</body>
+</html>
