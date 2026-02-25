@@ -70,11 +70,19 @@
        };
      }
      function handleButtonClick(){
+      //console.log(`Errors: ${JSON.stringify(errors)}`);
+      if(noErrors(errors)){
         var newErrors = InputValidator.validateEmptyValues(values,errors);
-        var newErrors2=InputValidator.veryLastValidation(values,newErrors);
+
+        //console.log(`newErrors: ${JSON.stringify(newErrors)}`);
         
+        var newErrors2=InputValidator.veryLastValidation(values,newErrors);
+        //console.log(`newErrors2: ${JSON.stringify(newErrors2)}`);
         setErrors(newErrors2);
-        if(!noErrors(errors)){
+        //console.log(`Errors: ${JSON.stringify(errors)}, so we have return`);
+
+        if(!noErrors(newErrors2)){
+          //console.log(`Errors: ${JSON.stringify(errors)}, so we have return`);
           setResults(emptyResults);
           return;
        }
@@ -82,6 +90,7 @@
         const response=controller.process(values);
         //console.log(`This is resultsModel: ${response.result}`);
         setResults(response.result);
+      }
      }
 
         
