@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +11,7 @@
   </head>
   <body>
     
-    <div class="view-container"></div>
+    <main class="view-container"></main>
     
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
@@ -75,7 +75,7 @@
         
         setErrors(newErrors2);
         if(!noErrors(errors)){
-          
+          setResults(emptyResults);
           return;
        }
         //console.log("Wir rufen den Controller auf!");
@@ -91,13 +91,28 @@
       }
      }
          return(
-          <div className="mainPart">
-              <InputSection values={values} errors={errors} 
-              inputFunction={handleChangeOfInput} enterClick={enterClick}  
-              />  
-              <ButtonSection convertData={handleButtonClick} />
+          <main className="mainPart">
+              <form
+                onSubmit={
+                  (e)=>{e.preventDefault();handleButtonClick();}
+                }
+                >
+                <section className="class-inputSection">
+                 <InputSection
+                   values={values}
+                   errors={errors} 
+                   inputFunction={handleChangeOfInput} 
+                   enterClick={enterClick}  
+                 />  
+               </section>
+               <section className="class-buttonSection">
+                <ButtonSection convertData={handleButtonClick} />
+               </section>
+               <section className="class-outputSection"> 
               <OutputSection results={results} />
-          </div>
+              </section>
+              </form>
+          </main>
 
         )
        }

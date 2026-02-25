@@ -1,10 +1,11 @@
 function ButtonSection({convertData}){
     return(
-        <div className="class-buttonSection">
+        <section className="class-buttonSection">
             
          <div className="class-line">
          </div> 
         <button 
+        type="button"
         className="arrow-button" 
         aria-label="Calculate age"
         onClick={convertData}
@@ -16,6 +17,6 @@ function ButtonSection({convertData}){
          />
          
        </button>
-        </div>
+        </section>
     )
 }
