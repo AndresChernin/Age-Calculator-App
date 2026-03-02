@@ -17,7 +17,7 @@
     font-style: italic;
 }
 
-@media (max-width:500px){
+@media (max-width:31.25rem){
  .class-for-result,.class-for-explanation{
     font-size: clamp(20px, 10vw, 75px);
     font-weight: 700;

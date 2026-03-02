@@ -6,7 +6,7 @@
             return Object.values(errors).every(e => e === "");
      }
      static noLeerValues(values){
-         return Object.values(values).every(v => v != "");
+         return Object.values(values).every(v => v !== "");
      }
 
   static validateFormatOfInput(field, value) {
@@ -31,12 +31,12 @@
           ? ""
           : "Must be ∈[1,12]";
 
-      case "year":
+      case "year":{
         const currentYear = new Date().getFullYear();
         return number >= 1900 && number <= currentYear
           ? ""
           : `Must be ∈[1900,${currentYear}] `;
-
+      }
       default:
         return "";
     }
@@ -64,7 +64,7 @@
 
  }
  static validateFutureMonth(values){
-  var error="";
+  let error="";
   //console.log(`Daten: ${values.day},${values.month},${values.year}.`);
   const currentYear=new Date().getFullYear();
   const currentMonth=new Date().getMonth();
