@@ -1,6 +1,8 @@
 .class-for-input{
-    width:  120px;
-    height:80px;
+    /*width:  120px;*/
+    flex:2 1 0;
+    min-width: 0;
+    height:5rem;
     border:1px solid white;
     
     display:flex;
@@ -9,7 +11,7 @@
 
 }
 .class-for-input label{
-    font-size: 10px;
+    font-size: 0.625rem;
     /*color:hsl(0, 1%, 66%);*/
     font-weight: 700;
     
@@ -44,12 +46,12 @@ input{
 input::placeholder{
    color:hsl(0, 1%, 66%);  
 }
-@media(max-width:480px){
+@media(max-width:30rem){
  .class-for-input{
     width:clamp(30px,30vw,120px);
  }    
 }
-@media(max-width:300px){
+@media(max-width:18.75rem){
  .class-for-input{
     height:auto;
  }

@@ -1,32 +1,33 @@
+
 body {
   
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-main);
 }
 
 .view-container {
-  background-color: hsl(0, 0%, 94%);
+  background-color: var(--color-bg-page);
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border:5px solod white;
+  border:5px solid var(--color-white);
 }
 
 .mainPart {
-  width: min(90vw, 600px);
+  width: min(90vw, 37.5rem);
   min-height: 70vh;
-  background-color: white;
-  border-radius: 10px 10px 100px 10px;
-  border:2px solid white;
-  padding:20px;
+  background-color: var(--color-white);
+  border-radius: var(--radius-main);
+  border:var(--border-debug);
+  padding:var(--space-lg);
 }
 .class-inputSection{
  width:80%;
  height:auto;
- border:1px solid white;
+ border:var(--border-debug);
  display:flex;
- gap:20px;
+ gap:var(--space-lg);
  margin:0;
  padding:0;
  /*margin-left:20px;
@@ -34,20 +35,22 @@ body {
  
 }
 .class-buttonSection{
-  border:1px solid white;
+  border:var(--border-debug);
   width:100%;
+  display:flex;
   /*height:60%;
   /*margin-left:20px;
   /*margin-top:20px;*/
-  margin:0; /*hat keine AUswirkung! Warum?*/
+  /*margin:0; /*hat keine AUswirkung! Warum?*/
   padding:0;
-  display:flex;
-  height:40%;
+  
+  /*height:40%;*/
   align-items: center;
+  min-height:var(--button-min-height);
 
 }
 .class-outputSection{
-  border:1px solid white;
+  border:var(--border-debug);
   width:90%;
   height:50%;
   /*margin-left:20px;
@@ -60,9 +63,9 @@ body {
 
 }
 
-@media (max-width:500px){
+@media (max-width:31.25rem){
   .mainPart{
-    padding-top:40px;
+    padding-top:2.5rem;
   }
   .class-inputSection{
     align-items: center;
@@ -80,7 +83,7 @@ body {
     height:64px;
   }
 }
-@media (max-width: 320px) {
+@media (max-width: 20rem) {
   .view-container {
     justify-content: flex-start; 
   /*  align-items: flex-start;   */

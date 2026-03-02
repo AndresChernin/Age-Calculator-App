@@ -1,0 +1,22 @@
+:root{
+  /*COLORS*/
+  --color-bg-page:hsl(0, 0%, 94%);
+  --color-white:#ffffff;
+  
+  /*TYPOGRAPHY*/
+  --font-main:'Poppins', sans-serif;
+
+  /*SPACING*/
+  --space-md:1rem;
+  --space-lg:1.25rem;
+
+  /*BORDER*/
+  --border-debug:1px solid white;
+
+  /*RADIUS*/
+  --radius-main:10px 10px 100px 10px;
+
+  /*BREAKPOINTS*/
+  --bp-tablet:31.25rem;
+  --bp-small:20rem;
+}
